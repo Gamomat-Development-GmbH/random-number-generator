@@ -1,0 +1,12 @@
+version: '3.5'
+services:
+  rng:
+    restart: always
+    image: rng:latest
+    container_name: rng
+    hostname: rng
+    ports:
+      - 8080:8080
+    networks:
+      - default
+

@@ -13,6 +13,12 @@ var (
 	rng = newRand()
 )
 
+func reseed() {
+	mux.Lock()
+	rng.Seed(time.Now().UnixNano())
+	mux.Unlock()
+}
+
 func newRand() *rand.Rand {
 	rng := rand.New(mt19937.New())
 	rng.Seed(time.Now().UnixNano())
@@ -21,13 +27,12 @@ func newRand() *rand.Rand {
 
 func getRandomNumbers(min, maxExclusive, count int) []int {
 	mux.Lock()
-	defer mux.Unlock()
-
 	numberRange := maxExclusive - min
 
 	numbers := make([]int, count)
 	for i := 0; i < count; i++ {
 		numbers[i] = rng.Intn(numberRange) + min
 	}
+	mux.Unlock()
 	return numbers
 }
