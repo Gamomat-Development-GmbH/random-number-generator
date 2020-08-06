@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/binary"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -26,6 +27,7 @@ func RandomNumberHandler(w http.ResponseWriter, r *http.Request) {
 	min, minConvError := strconv.Atoi(query.Get("min"))
 	maxExclusive, maxExclusiveConvError := strconv.Atoi(query.Get("maxExclusive"))
 	count, countConvErr := strconv.Atoi(query.Get("count"))
+	format := query.Get("format")
 
 	errorMessage := ""
 
@@ -51,6 +53,24 @@ func RandomNumberHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	randomNumbers := getRandomNumbers(min, maxExclusive, count)
-	bytes, _ := json.Marshal(RandomNumberHttpResponse{query.Get("min"), query.Get("maxExclusive"), query.Get("count"), randomNumbers})
-	_, _ = w.Write(bytes)
+
+	switch format {
+	case "int32_le":
+		_ = binary.Write(w, binary.LittleEndian, convertArrayIntToInt32(randomNumbers))
+	case "int32_be":
+		_ = binary.Write(w, binary.BigEndian, convertArrayIntToInt32(randomNumbers))
+	default:
+		fallthrough
+	case "json":
+		bytes, _ := json.Marshal(RandomNumberHttpResponse{query.Get("min"), query.Get("maxExclusive"), query.Get("count"), randomNumbers})
+		_, _ = w.Write(bytes)
+	}
+}
+
+func convertArrayIntToInt32(values []int) []int32 {
+	result := make([]int32, len(values))
+	for i, v := range values {
+		result[i] = int32(v)
+	}
+	return result
 }
