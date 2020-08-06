@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  rng:
+    build: ../
+    container_name: rng
+    hostname: rng
+    ports:
+      - "8080:8080"
+  dieharder:
+    build: .
+    container_name: dh
+    depends_on:
+      - rng
