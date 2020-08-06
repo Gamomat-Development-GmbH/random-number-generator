@@ -27,6 +27,9 @@ In case for int32_le or int32_be format the response is binary.
 
 # Cryptographic strength
 
+The RNG Service is using an implementation of a Mersenne-Twister.
+To ensure the cryptographical strength cycling and reseeding was implemented in addition.
+
 ## Cycling
 The cycling causes the RNG to skip a random amount of random numbers (10 up to 99).
 
