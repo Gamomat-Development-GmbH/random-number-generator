@@ -6,7 +6,7 @@ services:
     container_name: rng
     hostname: rng
     ports:
-      - "8080:8080"
+      - "8080"
   dieharder:
     build: .
     container_name: dh

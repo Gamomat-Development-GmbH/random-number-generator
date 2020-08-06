@@ -24,14 +24,16 @@ var (
 
 func reseed() {
 	mux.Lock()
-	mersenneTwister.Seed(time.Now().UnixNano())
+	mersenneTwister.Seed(rand.Int63())
 	mux.Unlock()
 }
 
 func newMersenneTwister() *rand.Rand {
-	rng := rand.New(mt19937.New())
-	rng.Seed(time.Now().UnixNano())
-	return rng
+	rand.Seed(time.Now().UnixNano())
+
+	mersenneTwister := rand.New(mt19937.New())
+	mersenneTwister.Seed(rand.Int63())
+	return mersenneTwister
 }
 
 func getRandomNumbers(min, maxExclusive, count int) []int {
