@@ -8,11 +8,12 @@ The Mersenne Twister implementation of Jochen Voss (https://github.com/seehuhn/m
 min - lower bounce for random numbers
 maxExclusive - upper bounce exclusive for random numbers
 count - count of random numbers to get
-format - optional: json, int32_le, int32_be
+format - optional, possible values: json (default), int32_le, int32_be    
 
 # Response
 
-## format json
+In case for json format:
+
 ```json
 {
     "min": 1,
@@ -22,7 +23,9 @@ format - optional: json, int32_le, int32_be
 }
 ```
 
-# Run dieharder (https://webhome.phy.duke.edu/~rgb/General/dieharder.php) test suite:
+In case for int32_le or int32_be format the response is binary.
+
+# Cryptographic strength
 
 ## Cycling
 The cycling causes the RNG to skip a random amount of random numbers (10 up to 99).
