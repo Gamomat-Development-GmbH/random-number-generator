@@ -4,14 +4,15 @@ The Mersenne Twister implementation of Jochen Voss (https://github.com/seehuhn/m
 
 # Usage
 # URL Parameters
-
-min - lower bounce for random numbers
-maxExclusive - upper bounce exclusive for random numbers
-count - count of random numbers to get
-format - optional, possible values: json (default), int32_le, int32_be    
+* min - lower bounce for random numbers
+* maxExclusive - upper bounce exclusive for random numbers
+* count - count of random numbers to get
+* format - optional, possible values: 
+    * json (default)
+    * int32_le
+    * int32_be    
 
 # Response
-
 In case for json format:
 
 ```json
