@@ -18,7 +18,7 @@ count - count of random numbers to get
 }
 ```
 
-# Run dieharder (https://webhome.phy.duke.edu/~rgb/General/dieharder.php) test suite:
+### Run dieharder (https://webhome.phy.duke.edu/~rgb/General/dieharder.php) test suite:
 
 * cd into directory test and run `docker-compose up`. This will build a container named "rng" and a container named "dh" and execute the dieharder suite of tests.
 
