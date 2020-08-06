@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"runtime"
 	"time"
@@ -10,9 +11,11 @@ import (
 
 const RESEEDING_INTERVAL_MILLI_SECONDS_MIN = 1000
 const RESEEDING_INTERVAL_MILLI_SECONDS_MAX = 10000
+const RESEEDING_INTERVAL_MILLI_SECONDS_RANGE = RESEEDING_INTERVAL_MILLI_SECONDS_MAX - RESEEDING_INTERVAL_MILLI_SECONDS_MIN
 
 const SLEEP_INTERVAL_MILLI_SECONDS_MIN = 1000
 const SLEEP_INTERVAL_MILLI_SECONDS_MAX = 10000
+const SLEEP_INTERVAL_MILLI_SECONDS_RANGE = SLEEP_INTERVAL_MILLI_SECONDS_MAX - SLEEP_INTERVAL_MILLI_SECONDS_MIN
 
 func main() {
 	fmt.Println("Server started...", fmt.Sprintf("GOOS %s GOARCH %s", runtime.GOOS, runtime.GOARCH))
@@ -35,9 +38,11 @@ func main() {
 }
 
 func getNextBackgroundReseedingInterval() time.Duration {
-	return time.Millisecond * time.Duration(getRandomNumbers(RESEEDING_INTERVAL_MILLI_SECONDS_MIN, RESEEDING_INTERVAL_MILLI_SECONDS_MAX, 1)[0])
+	millisecondsToWait := rand.Intn(RESEEDING_INTERVAL_MILLI_SECONDS_RANGE) + RESEEDING_INTERVAL_MILLI_SECONDS_MIN
+	return time.Millisecond * time.Duration(millisecondsToWait)
 }
 
 func getNextBackgroundCyclingInterval() time.Duration {
-	return time.Millisecond * time.Duration(getRandomNumbers(SLEEP_INTERVAL_MILLI_SECONDS_MIN, SLEEP_INTERVAL_MILLI_SECONDS_MAX, 1)[0])
+	millisecondsToWait := rand.Intn(SLEEP_INTERVAL_MILLI_SECONDS_RANGE) + SLEEP_INTERVAL_MILLI_SECONDS_MIN
+	return time.Millisecond * time.Duration(millisecondsToWait)
 }
