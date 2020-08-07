@@ -114,5 +114,34 @@ dh           |       rgb_lagged_sum|  10|   1000000|     100|0.87828729|  PASSED
 dh           |       rgb_lagged_sum|  11|   1000000|     100|0.67421256|  PASSED  
 dh           |       rgb_lagged_sum|  12|   1000000|     100|0.47101105|  PASSED  
 dh           |       rgb_lagged_sum|  13|   1000000|     100|0.89094804|  PASSED  
-...
+dh           |       rgb_lagged_sum|  14|   1000000|     100|0.17939373|  PASSED  
+dh           |       rgb_lagged_sum|  15|   1000000|     100|0.90770425|  PASSED  
+dh           |       rgb_lagged_sum|  16|   1000000|     100|0.11492168|  PASSED  
+dh           |       rgb_lagged_sum|  17|   1000000|     100|0.13420753|  PASSED  
+dh           |       rgb_lagged_sum|  18|   1000000|     100|0.74547014|  PASSED  
+dh           |       rgb_lagged_sum|  19|   1000000|     100|0.27739110|  PASSED  
+dh           |       rgb_lagged_sum|  20|   1000000|     100|0.24369976|  PASSED  
+dh           |       rgb_lagged_sum|  21|   1000000|     100|0.12504574|  PASSED  
+dh           |       rgb_lagged_sum|  22|   1000000|     100|0.55463866|  PASSED  
+dh           |       rgb_lagged_sum|  23|   1000000|     100|0.42553500|  PASSED  
+dh           |       rgb_lagged_sum|  24|   1000000|     100|0.97181598|  PASSED  
+dh           |       rgb_lagged_sum|  25|   1000000|     100|0.63377181|  PASSED  
+dh           |       rgb_lagged_sum|  26|   1000000|     100|0.97969538|  PASSED  
+dh           |       rgb_lagged_sum|  27|   1000000|     100|0.24547396|  PASSED  
+dh           |       rgb_lagged_sum|  28|   1000000|     100|0.92089785|  PASSED  
+dh           |       rgb_lagged_sum|  29|   1000000|     100|0.70852911|  PASSED  
+dh           |       rgb_lagged_sum|  30|   1000000|     100|0.74111213|  PASSED  
+dh           |       rgb_lagged_sum|  31|   1000000|     100|0.81127708|  PASSED  
+dh           |       rgb_lagged_sum|  32|   1000000|     100|0.99907975|   WEAK   
+dh           |      rgb_kstest_test|   0|     10000|    1000|0.32384134|  PASSED  
+dh           |      dab_bytedistrib|   0|  51200000|       1|0.77634574|  PASSED  
+dh           |              dab_dct| 256|     50000|       1|0.56430163|  PASSED  
+dh           | Preparing to run test 207.  ntuple = 0
+dh           |         dab_filltree|  32|  15000000|       1|0.11463595|  PASSED  
+dh           |         dab_filltree|  32|  15000000|       1|0.77520305|  PASSED  
+dh           | Preparing to run test 208.  ntuple = 0
+dh           |        dab_filltree2|   0|   5000000|       1|0.82191291|  PASSED  
+dh           |        dab_filltree2|   1|   5000000|       1|0.62082741|  PASSED  
+dh           | Preparing to run test 209.  ntuple = 0
+dh           |         dab_monobit2|  12|  65000000|       1|0.94290205|  PASSED  
 ```
