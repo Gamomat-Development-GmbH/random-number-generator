@@ -15,10 +15,10 @@ type RandomNumberHttpError struct {
 }
 
 type RandomNumberHttpResponse struct {
-	Min           string `json:"min"`
-	MaxExclusive  string `json:"maxExclusive"`
-	Count         string `json:"count"`
-	RandomNumbers []int  `json:"randomNumbers"`
+	Min           string  `json:"min"`
+	MaxExclusive  string  `json:"maxExclusive"`
+	Count         string  `json:"count"`
+	RandomNumbers []int64 `json:"randomNumbers"`
 }
 
 func RandomNumberHandler(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +52,7 @@ func RandomNumberHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	randomNumbers := getRandomNumbers(min, maxExclusive, count)
+	randomNumbers := getRandomNumbers(int64(min), int64(maxExclusive), int64(count))
 
 	switch format {
 	case "int32_le":
@@ -67,7 +67,7 @@ func RandomNumberHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func convertArrayIntToInt32(values []int) []int32 {
+func convertArrayIntToInt32(values []int64) []int32 {
 	result := make([]int32, len(values))
 	for i, v := range values {
 		result[i] = int32(v)

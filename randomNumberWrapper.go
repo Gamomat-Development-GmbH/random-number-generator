@@ -1,64 +1,72 @@
 package main
 
 import (
+	"crypto/rand"
 	"github.com/seehuhn/mt19937"
-	"math/rand"
+	"io"
+	"math"
+	"math/big"
 	"sync"
-	"time"
 )
 
 const NUMBERS_TO_CYCLE_MIN = 10
 const NUMBERS_TO_CYCLE_MAX = 100
-const NUMBERS_TO_CYCLE_RANGE = NUMBERS_TO_CYCLE_MAX - NUMBERS_TO_CYCLE_MIN
 
 const CYCLE_STEP_MIN = 100
 const CYCLE_STEP_MAX = 600
-const CYCLE_STEP_RANGE = CYCLE_STEP_MAX - CYCLE_STEP_MIN
 
 var mux sync.Mutex
 
 var (
-	mersenneTwister     = newMersenneTwister()
-	currentRandomNumber = 0
+	mersenneTwisterReader = mt19937.New()
+	systemSecureReader    = rand.Reader
+
+	maxInt64            = big.NewInt(math.MaxInt64)
+	cycleStepRange      = big.NewInt(CYCLE_STEP_MAX - CYCLE_STEP_MIN)
+	numbersToCycleRange = big.NewInt(NUMBERS_TO_CYCLE_MAX - NUMBERS_TO_CYCLE_MIN)
+
+	currentRandomNumber int64 = 0
+	nextCycleStepSize         = getRandomNumber(systemSecureReader, cycleStepRange) + CYCLE_STEP_MIN
 )
 
 func reseed() {
 	mux.Lock()
-	mersenneTwister.Seed(rand.Int63())
+	mersenneTwisterReader.Seed(getRandomNumber(systemSecureReader, maxInt64))
 	mux.Unlock()
 }
 
-func newMersenneTwister() *rand.Rand {
-	rand.Seed(time.Now().UnixNano())
-
-	mersenneTwister := rand.New(mt19937.New())
-	mersenneTwister.Seed(rand.Int63())
-	return mersenneTwister
-}
-
-func getRandomNumbers(min, maxExclusive, count int) []int {
+func getRandomNumbers(min, maxExclusive, count int64) []int64 {
 	mux.Lock()
-	numberRange := maxExclusive - min
 
-	cycleStepSize := rand.Intn(CYCLE_STEP_RANGE) + CYCLE_STEP_MIN
+	numberRange := big.NewInt(maxExclusive - min)
 
-	numbers := make([]int, count)
-	for i := 0; i < count; i++ {
+	numbers := make([]int64, count)
+	var i int64
+	for i = 0; i < count; i++ {
 		currentRandomNumber++
-		if currentRandomNumber%cycleStepSize == 0 {
+		if currentRandomNumber%nextCycleStepSize == 0 {
 			cycleWithoutLocking()
+			nextCycleStepSize = getRandomNumber(systemSecureReader, cycleStepRange) + CYCLE_STEP_MIN
 		}
 
-		numbers[i] = mersenneTwister.Intn(numberRange) + min
+		numbers[i] = getRandomNumber(mersenneTwisterReader, numberRange)
 	}
 	mux.Unlock()
 	return numbers
 }
 
+func getRandomNumber(reader io.Reader, maxExclusive *big.Int) int64 {
+	result, err := rand.Int(reader, maxExclusive)
+	if err != nil {
+		panic(err)
+	}
+	return result.Int64()
+}
+
 func cycleWithoutLocking() {
-	numbersToCycle := rand.Intn(NUMBERS_TO_CYCLE_RANGE) + NUMBERS_TO_CYCLE_MIN
-	for i := 0; i < numbersToCycle; i++ {
-		mersenneTwister.Int()
+	numbersToCycle := getRandomNumber(systemSecureReader, numbersToCycleRange) + NUMBERS_TO_CYCLE_MIN
+	for i := 0; i < int(numbersToCycle); i++ {
+		mersenneTwisterReader.Int63()
 	}
 }
 

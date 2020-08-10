@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
-	"math/rand"
+	"math/big"
 	"net/http"
 	"runtime"
 	"time"
@@ -11,7 +11,10 @@ import (
 
 const SLEEP_INTERVAL_MILLI_SECONDS_MIN = 1000
 const SLEEP_INTERVAL_MILLI_SECONDS_MAX = 10000
-const SLEEP_INTERVAL_MILLI_SECONDS_RANGE = SLEEP_INTERVAL_MILLI_SECONDS_MAX - SLEEP_INTERVAL_MILLI_SECONDS_MIN
+
+var (
+	sleepIntervalRange = big.NewInt(SLEEP_INTERVAL_MILLI_SECONDS_MAX - SLEEP_INTERVAL_MILLI_SECONDS_MIN)
+)
 
 func main() {
 	fmt.Println("Server started...", fmt.Sprintf("GOOS %s GOARCH %s", runtime.GOOS, runtime.GOARCH))
@@ -34,6 +37,6 @@ func main() {
 }
 
 func getNextBackgroundInterval() time.Duration {
-	millisecondsToWait := rand.Intn(SLEEP_INTERVAL_MILLI_SECONDS_RANGE) + SLEEP_INTERVAL_MILLI_SECONDS_MIN
+	millisecondsToWait := getRandomNumber(systemSecureReader, sleepIntervalRange) + SLEEP_INTERVAL_MILLI_SECONDS_MIN
 	return time.Millisecond * time.Duration(millisecondsToWait)
 }
