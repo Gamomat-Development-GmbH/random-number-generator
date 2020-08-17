@@ -59,6 +59,11 @@ func RandomNumberHandler(w http.ResponseWriter, r *http.Request) {
 		_ = binary.Write(w, binary.LittleEndian, convertArrayIntToInt32(randomNumbers))
 	case "int32_be":
 		_ = binary.Write(w, binary.BigEndian, convertArrayIntToInt32(randomNumbers))
+	case "raw":
+		for _, v := range randomNumbers {
+			_, _ = w.Write([]byte(strconv.Itoa(int(v))))
+			_, _ = w.Write([]byte("\n"))
+		}
 	default:
 		fallthrough
 	case "json":

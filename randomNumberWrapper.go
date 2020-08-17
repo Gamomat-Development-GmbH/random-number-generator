@@ -2,10 +2,10 @@ package main
 
 import (
 	"crypto/rand"
-	"github.com/seehuhn/mt19937"
 	"io"
 	"math"
 	"math/big"
+	"rng/mt19937"
 	"sync"
 )
 

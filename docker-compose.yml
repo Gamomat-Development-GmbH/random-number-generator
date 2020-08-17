@@ -2,7 +2,7 @@ version: '3.5'
 services:
   rng:
     restart: always
-    image: rng:latest
+    build: .
     container_name: rng
     hostname: rng
     ports:
