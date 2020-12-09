@@ -1,6 +1,6 @@
 # random-number-generator
 This project is a http endpoint for serving random numbers within a given range.
-The Mersenne Twister implementation of Jochen Voss (https://github.com/seehuhn/mt19937) is used.
+The Fortuna implementation of Jochen Voss (https://github.com/seehuhn/fortuna) is used.
 
 # Usage
 # URL Parameters
@@ -28,7 +28,7 @@ In case for int32_le or int32_be format the response is binary.
 
 # Cryptographic strength
 
-The RNG Service is using an implementation of a Mersenne-Twister.
+The RNG Service is using an implementation of Fortuna.
 To ensure the cryptographical strength cycling and reseeding was implemented in addition.
 
 ## Cycling

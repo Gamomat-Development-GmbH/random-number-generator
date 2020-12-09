@@ -1,0 +1,4 @@
+github.com/seehuhn/fortuna v1.0.1 h1:lu9+CHsmR0bZnx5Ay646XvCSRJ8PJTi5UYJwDBX68H0=
+github.com/seehuhn/fortuna v1.0.1/go.mod h1:LX8ubejCnUoT/hX+1aKUtbKls2H6DRkqzkc7TdR3iis=
+github.com/seehuhn/sha256d v1.0.0 h1:TXTsAuEWr02QjRm153Fnvvb6fXXDo7Bmy1FizxarGYw=
+github.com/seehuhn/sha256d v1.0.0/go.mod h1:PEuxg9faClSveVuFXacQmi+NtDI/PX8bpKjtNzf2+s4=
