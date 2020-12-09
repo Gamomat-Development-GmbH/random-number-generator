@@ -32,7 +32,7 @@ The RNG Service is using an implementation of Fortuna.
 To ensure the cryptographical strength cycling and reseeding was implemented in addition.
 
 ## Cycling
-The cycling causes the RNG to skip a random amount of random numbers (10 up to 99).
+The cycling causes the RNG to skip a random amount of random numbers (1 up to 9).
 
 * A background process is executing the cycling in a random time period (every 1000 up to 10000 milliseconds).
 * When requesting random numbers then cycling is interrupting the process in a random step (every 100 up to 600 random numbers).
