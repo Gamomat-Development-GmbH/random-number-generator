@@ -42,12 +42,6 @@ func close() {
 	rngReader.Close()
 }
 
-func reseed() {
-	mux.Lock()
-	rngReader.Seed(getRandomNumber(systemSecureReader, maxInt64))
-	mux.Unlock()
-}
-
 func getRandomNumbers(min, maxExclusive, count int64) []int64 {
 	mux.Lock()
 

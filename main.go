@@ -30,13 +30,6 @@ func main() {
 	go func() {
 		for {
 			time.Sleep(getNextBackgroundInterval())
-			reseed()
-		}
-	}()
-
-	go func() {
-		for {
-			time.Sleep(getNextBackgroundInterval())
 			cycle()
 		}
 	}()

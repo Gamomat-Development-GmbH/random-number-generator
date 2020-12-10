@@ -37,9 +37,5 @@ The cycling causes the RNG to skip a random amount of random numbers (1 up to 9)
 * A background process is executing the cycling in a random time period (every 1000 up to 10000 milliseconds).
 * When requesting random numbers then cycling is interrupting the process in a random step (every 100 up to 600 random numbers).
 
-## Reseeding
-The reseeding is updating the random number generator seed.
-A background process is executing the reseeding in a random time period (every 1000 up to 10000 milliseconds).
-
 ## Testing
 See [README.md](test/README.md) in folder test for instructions.
