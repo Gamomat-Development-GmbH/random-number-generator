@@ -1,7 +1,9 @@
 package main
 
 import (
+	"crypto/rand"
 	"fmt"
+	"math/big"
 	"testing"
 	"time"
 )
@@ -20,4 +22,11 @@ func Test_testTime(t *testing.T) {
 	after := time.Now()
 	duration := after.Sub(before)
 	fmt.Println(duration)
+}
+
+func Test_test513(t *testing.T) {
+	for i := 1; i < 100; i++ {
+		value, _ := rand.Int(systemSecureReader, big.NewInt(513))
+		fmt.Println(value)
+	}
 }
