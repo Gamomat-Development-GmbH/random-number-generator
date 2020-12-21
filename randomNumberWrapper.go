@@ -12,8 +12,8 @@ import (
 const NUMBERS_TO_CYCLE_MIN = 50
 const NUMBERS_TO_CYCLE_MAX = 100
 
-const CYCLE_STEP_MIN = 100
-const CYCLE_STEP_MAX = 600
+const CYCLE_STEP_MIN = 1000
+const CYCLE_STEP_MAX = 6000
 
 var mux sync.Mutex
 
