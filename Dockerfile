@@ -12,8 +12,6 @@ RUN go build -o /app
 FROM alpine:3.9
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build /app /usr/local/bin/app
-COPY scripts/ /usr/local/bin/
-
-RUN echo 'checksum' & getAppHash.sh
+RUN echo 'checksum' & sha256sum /usr/local/bin/app
 
 ENTRYPOINT ["/usr/local/bin/app"]
